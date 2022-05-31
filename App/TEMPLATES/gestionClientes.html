@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %} Gestión de clientes {% endblock %}
+
+{% block body %}
+<div class="row"> 
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <h2> Gestión de clientes </h2>
+                <div class="card">
+                        <div class="card-body">
+                                <form action="/registrarClientes/" method="POST">{% csrf_token %}
+                                        <div class="form-group">
+                                                <input type="text" id="txtID" name="txtID" class="form-control" placeholder="ID" minlength="6" 
+                                                maxlength="6" required>
+                                        </div>       
+                                        <div class="form-group">
+                                                <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" 
+                                                maxlength="50" required>
+                                        </div> 
+                                        <div class="form-group">
+                                                <input type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" 
+                                                maxlength="50" required>
+                                        </div>      
+                                        <div class="form-group">
+                                                <button type="submit" class="btn btn-success btn-block text-white" > GUARDAR </button>
+                                        </div>      
+                                </form>                                
+                        </div>
+                </div> 
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+                <div class="table-responsive">
+                        <table class="table table-striped">
+                                <thead>
+                                        <tr>
+                                                <th>ID</th>
+                                                <th>Nombre</th>
+                                                <th>Apellido</th>
+                                                <th colspan="2">Opciones</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        {% for c in clientes %}
+                                        <tr>
+                                                <th>{{c.ClienteID}}</th>
+                                                <th>{{c.ClienteNombre}}</th>
+                                                <th>{{c.ClienteApellido}}</th>
+                                                <th><a href="edicionClientes/{{c.ClienteID}}" class="btn btn-info">Editar</a></th>
+                                                <th><a href="eliminarClientes/{{c.ClienteID}}" class="btn btn-danger">Eliminar</a></th>
+                                        </tr>
+                                        {% endfor %}
+                                </tbody>                        
+                        </table>
+
+
+                </div>
+
+        </div>
+</div>
+
+
+{% endblock %}
