@@ -18,14 +18,15 @@ def registrarClientes(request):
 
 def edicionClientes(request, ClienteID):
     cliente = Clientes.objects.get(ClienteID=ClienteID)
-    return render(request, "edicionClientes.html", {"clientes": cliente})
+    return render(request, "edicionClientes.html", {"cliente": cliente})
 
 def editarClientes(request):
     ID = request.POST['txtID']
     nombre = request.POST['txtNombre']
     apellido = request.POST['txtApellido']
 
-    cliente = Clientes.objects.get(ID)
+    cliente = Clientes.objects.get(ClienteID=ID, ClienteNombre=nombre, ClienteApellido=apellido)
+    cliente.ClienteID = ID
     cliente.ClienteNombre = nombre
     cliente.ClienteApellido = apellido
     cliente.save()  
